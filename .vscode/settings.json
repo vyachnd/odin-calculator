@@ -1,0 +1,5 @@
+{
+  "javascript.preferences.importModuleSpecifierEnding": "js",
+  "javascript.format.semicolons": "insert",
+  "typescript.format.semicolons": "insert"
+}
