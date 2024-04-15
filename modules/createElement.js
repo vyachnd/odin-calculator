@@ -1,8 +1,8 @@
 class CreateElement {
   constructor(tagName, attributes, children) {
-    this.element = document.createElement(tagName);
-    this.attributes = attributes;
-    this.children = children;
+    this.element = document.createElement(tagName || 'div');
+    this.attributes = attributes || {};
+    this.children = children || [];
 
     this.#setAttributes();
     this.#renderChildren();
