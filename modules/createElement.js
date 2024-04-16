@@ -1,8 +1,11 @@
+import Emitter from './emitter.js';
+
 class CreateElement {
   constructor(tagName, attributes, children) {
     this.element = document.createElement(tagName || 'div');
     this.attributes = attributes || {};
     this.children = children || [];
+    this.emitter = new Emitter();
 
     this.#setAttributes();
     this.#renderChildren();
@@ -171,5 +174,13 @@ class CreateElement {
     }
   }
 }
+
+CreateElement.prototype.addEventListener = function (eventName, callback, options) {
+  this.element.addEventListener(eventName, callback, options);
+};
+
+CreateElement.prototype.removeEventListener = function (eventName, callback, options) {
+  this.element.removeEventListener(eventName, callback, options);
+};
 
 export default CreateElement;
