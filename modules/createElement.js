@@ -138,13 +138,11 @@ class CreateElement {
       const oldChild = this.children[i];
 
       if (oldChild && (newChild !== oldChild)) {
-        if (oldChild instanceof CreateElement) oldChild.unmount();
+        if (newChild instanceof CreateElement) newChild.mount(this.element);
 
-        if (newChild instanceof CreateElement) {
-          newChild.mount(this.element);
-        } else {
-          oldNodes[i].replaceWith(newChild);
-        }
+        oldNodes[i].replaceWith(newChild?.element || newChild);
+
+        if (oldChild instanceof CreateElement) oldChild.unmount();
       }
 
       if (!oldChild) {
