@@ -18,7 +18,12 @@ class CreateElement {
       if (attributeKey === 'dataset') {
         for (const dataset of Object.entries(attributeValue)) {
           const [datasetKey, datasetValue] = dataset;
-          this.element.dataset[datasetKey] = datasetValue;
+
+          if (typeof datasetValue === 'boolean') {
+            if (datasetValue) this.element.dataset[datasetKey] = '';
+          } else {
+            this.element.dataset[datasetKey] = datasetValue;
+          }
         }
       } else if (attributeKey === 'style') {
         for (const style of Object.entries(attributeValue)) {
@@ -28,7 +33,11 @@ class CreateElement {
       } else if (attributeKey === 'class') {
         this.element.classList.add(...attributeValue);
       } else {
-        this.element.setAttribute(attributeKey, attributeValue);
+        if (typeof attributeValue === 'boolean') {
+          this.element[attributeKey] = attributeValue;
+        } else {
+          this.element.setAttribute(attributeKey, attributeValue);
+        }
       }
     }
   }
@@ -75,7 +84,11 @@ class CreateElement {
         }
       } else {
         if (this.attributes[newAttributeKey] !== newAttributeValue) {
-          this.element.setAttribute(newAttributeKey, newAttributeValue);
+          if (typeof newAttributeValue === 'boolean') {
+            this.element[newAttributeKey] = newAttributeValue;
+          } else {
+            this.element.setAttribute(newAttributeKey, newAttributeValue);
+          }
         }
       }
     }
