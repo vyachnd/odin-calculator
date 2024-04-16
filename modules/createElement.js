@@ -17,6 +17,11 @@ class CreateElement {
           const [datasetKey, datasetValue] = dataset;
           this.element.dataset[datasetKey] = datasetValue;
         }
+      } else if (attributeKey === 'style') {
+        for (const style of Object.entries(attributeValue)) {
+          const [styleKey, styleValue] = style;
+          this.element.style[styleKey] = styleValue;
+        }
       } else if (attributeKey === 'class') {
         this.element.classList.add(...attributeValue);
       } else {
@@ -43,8 +48,20 @@ class CreateElement {
         for (const dataset of Object.entries(newAttributeValue)) {
           const [datasetKey, datasetValue] = dataset;
 
-          if (datasetValue !== this.attributes?.dataset[datasetKey]) {
-            this.element.dataset[datasetKey] = datasetValue;
+          if (datasetValue !== this.attributes?.dataset?.[datasetKey]) {
+            if (typeof datasetValue === 'boolean') {
+              if (datasetValue) this.element.dataset[datasetKey] = '';
+            } else {
+              this.element.dataset[datasetKey] = datasetValue;
+            }
+          }
+        }
+      } else if (newAttributeKey === 'style') {
+        for (const style of Object.entries(newAttributeValue)) {
+          const [styleKey, styleValue] = style;
+
+          if (styleValue !== this.attributes?.style?.[styleKey]) {
+            this.element.style[styleKey] = styleValue;
           }
         }
       } else if (newAttributeKey === 'class') {
@@ -69,6 +86,14 @@ class CreateElement {
 
           if (!newAttributes?.dataset?.hasOwnProperty(datasetKey)) {
             delete this.element.dataset[datasetKey];
+          }
+        }
+      } else if (oldAttributeKey === 'style') {
+        for (const style of Object.entries(oldAttributeValue)) {
+          const [styleKey] = style;
+
+          if (!newAttributes?.style?.hasOwnProperty(styleKey)) {
+            this.element.style[styleKey] = null;
           }
         }
       } else if (oldAttributeKey === 'class') {
@@ -138,7 +163,13 @@ class CreateElement {
     }
   }
 
-  mount(parent) { parent.append(this.element); }
+  mount(parent, isPrepend) {
+    if (isPrepend) {
+      parent.prepend(this.element);
+    } else {
+      parent.append(this.element);
+    }
+  }
 }
 
 export default CreateElement;
