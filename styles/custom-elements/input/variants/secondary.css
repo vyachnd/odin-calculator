@@ -1,0 +1,45 @@
+.ce-input[data-variant='secondary'] {
+  --bg-color: rgba(var(--ce-color-sky-900));
+  --text-color: rgba(var(--ce-color-sky-50));
+  --bordered-color: rgb(var(--ce-color-sky-700));
+}
+
+.ce-input[data-variant='secondary'] .ce-input__field::placeholder {
+  --placeholder-color: rgba(var(--ce-color-sky-50), 0.4);
+}
+
+.ce-input[data-variant='secondary'] > .ce-input__icon {
+  --icon-color: rgba(var(--ce-color-sky-50), 0.4);
+}
+
+.ce-input[data-variant='secondary']:hover {
+  --bg-color_hover: rgba(var(--ce-color-sky-800), 0.4);
+  --bordered-color_hover: rgba(var(--ce-color-sky-600));
+}
+.ce-input[data-variant='secondary']:focus-within {
+  --bg-color_focus: rgba(var(--ce-color-sky-950), 0.24);
+  --bordered-color_focus: rgba(var(--ce-color-sky-500));
+}
+
+/* Darkened */
+.ce-input[data-variant='secondary'][data-darkened] {
+  --bg-color_darkened: rgba(var(--ce-color-sky-950));
+  --text-color_darkened: rgba(var(--ce-color-sky-50));
+}
+
+.ce-input[data-variant='secondary'][data-darkened] .ce-input__field::placeholder {
+  --placeholder-color_darkened: rgba(var(--ce-color-sky-50), 0.4);
+}
+
+.ce-input[data-variant='secondary'][data-darkened] > .ce-input__icon {
+  --icon-color_darkened: rgba(var(--ce-color-sky-50), 0.4);
+}
+
+.ce-input[data-variant='secondary'][data-darkened]:hover {
+  --bg-color_darkened_hover: rgba(var(--ce-color-sky-800), 0.24);
+  --bordered-color_darkened_hover: rgb(var(--ce-color-sky-600));
+}
+.ce-input[data-variant='secondary'][data-darkened]:focus-within {
+  --bg-color_darkened_focus: rgba(var(--ce-color-sky-800), 0.6);
+  --bordered-color_darkened_focus: rgb(var(--ce-color-sky-500));
+}

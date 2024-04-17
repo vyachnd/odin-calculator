@@ -1,0 +1,10 @@
+.ce-input[data-rounded] {
+  border-radius: 20px;
+}
+
+.ce-input[data-rounded] > .ce-input__icon:first-child {
+  margin-left: 14px;
+}
+.ce-input[data-rounded] > .ce-input__icon:last-child {
+  margin-right: 14px;
+}

@@ -1,0 +1,5 @@
+.ce-button:disabled,
+.ce-button[data-disabled] {
+  opacity: 0.24;
+  pointer-events: none;
+}

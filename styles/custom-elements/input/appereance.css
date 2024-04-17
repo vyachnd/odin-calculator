@@ -1,0 +1,26 @@
+.ce-input {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.ce-input .ce-input__field::placeholder {
+  color: var(--placeholder-color);
+}
+
+.ce-input > .ce-input__icon {
+  color: var(--icon-color);
+}
+
+/* Darkened */
+.ce-input[data-darkened] {
+  background-color: var(--bg-color_darkened);
+  color: var(--text-color_darkened);
+}
+
+.ce-input[data-darkened] .ce-input__field::placeholder {
+  color: var(--placeholder-color_darkened);
+}
+
+.ce-input[data-darkened] > .ce-input__icon {
+  color: var(--icon-color_darkened);
+}

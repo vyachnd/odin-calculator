@@ -1,0 +1,20 @@
+.ce-button[data-rounded] {
+  border-radius: 20px;
+}
+.ce-button:not([data-icon-only])[data-rounded] {
+  padding: 8px 20px;
+}
+
+.ce-button[data-size='sm'][data-rounded] {
+  border-radius: 16px;
+}
+.ce-button:not([data-icon-only])[data-size='sm'][data-rounded] {
+  padding: 6px 16px;
+}
+
+.ce-button[data-size='xs'][data-rounded] {
+  border-radius: 12px;
+}
+.ce-button:not([data-icon-only])[data-size='xs'][data-rounded] {
+  padding: 4px 12px;
+}

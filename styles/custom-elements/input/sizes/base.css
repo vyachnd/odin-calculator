@@ -1,0 +1,19 @@
+.ce-input {
+  border-radius: 6px;
+}
+
+/* Paddings with children */
+.ce-input .ce-input__field {
+  padding: 8px 16px;
+}
+.ce-input .ce-input__field:not(:first-child) {
+  padding-left: 8px;
+}
+.ce-input .ce-input__field:not(:last-child) {
+  padding-right: 8px;
+}
+
+/* Icon */
+.ce-input .ce-input__icon {
+  margin: 8px;
+}

@@ -1,0 +1,7 @@
+.ce-button[data-align='left'] {
+  justify-content: flex-start;
+}
+
+.ce-button[data-align='right'] {
+  justify-content: flex-end;
+}

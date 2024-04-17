@@ -1,0 +1,16 @@
+.ce-button:not(:disabled):hover,
+.ce-button:not(:disabled):focus-visible:hover {
+  background-color: var(--hover-bg-color);
+  color: var(--hover-text-color);
+  cursor: pointer;
+}
+
+.ce-button:not(:disabled):active,
+.ce-button:not(:disabled):focus-visible:active {
+  background-color: var(--active-bg-color);
+  color: var(--active-text-color);
+}
+
+.ce-button:not(:disabled):focus-visible {
+  outline: 1px solid var(--focus-outline-color);
+}

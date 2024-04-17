@@ -1,0 +1,44 @@
+.ce_flex {
+  display: flex;
+  gap: 8px;
+}
+.ce_inline-flex {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.ce_flex_col {
+  flex-direction: column;
+}
+
+.ce_top,
+.ce_right,
+.ce_bottom,
+.ce_left {
+  position: absolute;
+}
+
+.ce_top.ce_center,
+.ce_bottom.ce_center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ce_right.ce_center,
+.ce_left.ce_center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ce_top {
+  top: 0;
+}
+.ce_right {
+  right: 0;
+}
+.ce_bottom {
+  bottom: 0;
+}
+.ce_left {
+  left: 0;
+}

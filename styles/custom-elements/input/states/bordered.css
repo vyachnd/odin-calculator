@@ -1,0 +1,5 @@
+.ce-input[data-bordered] {
+  --bordered-size: 0 0 0 1px;
+
+  box-shadow: var(--bordered-size) var(--bordered-color);
+}

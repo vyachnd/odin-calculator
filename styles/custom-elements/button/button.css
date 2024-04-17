@@ -1,0 +1,48 @@
+/* Size */
+@import './sizes/base.css';
+@import './sizes/sm.css';
+@import './sizes/xs.css';
+
+/* States */
+@import './states/active.css';
+@import './states/align.css';
+@import './states/boxed.css';
+@import './states/disabled.css';
+@import './states/rounded.css';
+
+/* Variants */
+@import './variants/base.css';
+@import './variants/error.css';
+@import './variants/secondary.css';
+@import './variants/submit.css';
+@import './variants/warning.css';
+
+/* Appereance */
+@import './appereance.css';
+
+/* Interactive */
+@import './interactive.css';
+
+.ce-button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: none;
+  outline: none;
+  display: flex;
+  align-self: flex-start;
+  justify-content: center;
+  transition: background-color 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.ce-button .ce-button__caption {
+  color: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ce-button .ce-button__icon {
+  color: inherit;
+}

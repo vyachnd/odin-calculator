@@ -1,0 +1,13 @@
+.ce-button {
+  border-radius: 6px;
+  padding: 8px 16px;
+  gap: 8px;
+}
+
+.ce-button .button__text {
+  font: var(--ce-font-roboto-medium);
+}
+
+.ce-button .button__icon {
+  font-size: 24px;
+}

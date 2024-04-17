@@ -1,0 +1,28 @@
+.ce-input:hover::before {
+  background-color: var(--bg-color_hover);
+}
+.ce-input[data-bordered]:hover {
+  box-shadow: var(--bordered-size) var(--bordered-color_hover);
+}
+
+.ce-input:focus-within::before {
+  background-color: var(--bg-color_focus);
+}
+.ce-input[data-bordered]:focus-within {
+  box-shadow: var(--bordered-size) var(--bordered-color_focus);
+}
+
+/* Darkened */
+.ce-input[data-darkened]:hover::before {
+  background-color: var(--bg-color_darkened_hover);
+}
+.ce-input[data-bordered][data-darkened]:hover {
+  box-shadow: var(--bordered-size) var(--bordered-color_darkened_hover);
+}
+
+.ce-input[data-darkened]:focus-within::before {
+  background-color: var(--bg-color_darkened_focus);
+}
+.ce-input[data-bordered][data-darkened]:focus-within {
+  box-shadow: var(--bordered-size) var(--bordered-color_darkened_focus);
+}

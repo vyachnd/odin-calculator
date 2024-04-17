@@ -1,0 +1,32 @@
+.ce-icon {
+  display: inline-block;
+  direction: ltr;
+
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+
+  white-space: nowrap;
+  word-wrap: normal;
+
+  -webkit-font-smoothing: antialiased;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ce-icon[data-type='outlined'] {
+  font-family: 'Material Symbols Outlined';
+}
+.ce-icon[data-type='rounded'] {
+  font-family: 'Material Symbols Rounded';
+}
+.ce-icon[data-type='sharp'] {
+  font-family: 'Material Symbols Sharp';
+}

@@ -1,0 +1,38 @@
+.ce-button[data-variant='submit'] {
+  --bg-color: rgba(var(--ce-color-emerald-700));
+  --text-color: rgba(var(--ce-color-emerald-100));
+
+  --hover-bg-color: rgba(var(--ce-color-emerald-600));
+  --hover-text-color: rgba(var(--ce-color-emerald-50));
+
+  --active-bg-color: rgba(var(--ce-color-emerald-500));
+  --active-text-color: rgba(var(--ce-color-emerald-50));
+
+  --focus-outline-color: rgba(var(--ce-color-emerald-50));
+}
+
+.ce-button[data-variant='submit'][data-transparent] {
+  --bg-color: rgba(var(--ce-color-emerald-400), 0.12);
+  --text-color: rgba(var(--ce-color-emerald-400));
+
+  --hover-bg-color: rgba(var(--ce-color-emerald-400), 0.18);
+  --hover-text-color: rgba(var(--ce-color-emerald-300));
+
+  --active-bg-color: rgba(var(--ce-color-emerald-400), 0.24);
+  --active-text-color: rgba(var(--ce-color-emerald-50));
+
+  --focus-outline-color: rgba(var(--ce-color-emerald-400));
+}
+
+.ce-button[data-variant='submit']:not([data-fill]) {
+  --bg-color: none;
+  --text-color: rgba(var(--ce-color-emerald-400));
+
+  --hover-bg-color: rgba(var(--ce-color-emerald-400), 0.08);
+  --hover-text-color: rgba(var(--ce-color-emerald-300));
+
+  --active-bg-color: rgba(var(--ce-color-emerald-400), 0.12);
+  --active-text-color: rgba(var(--ce-color-emerald-200));
+
+  --focus-outline-color: rgba(var(--ce-color-emerald-400));
+}

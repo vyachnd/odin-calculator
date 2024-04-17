@@ -1,0 +1,9 @@
+/* Global */
+@import './global/colors.css';
+@import './global/fonts.css';
+@import './global/styles.css';
+
+/* Elements */
+@import './icon/icon.css';
+@import './button/button.css';
+@import './input/input.css';

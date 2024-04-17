@@ -1,0 +1,11 @@
+.ce-button[data-boxed] {
+  padding: 8px;
+}
+
+.ce-button[data-boxed][data-size='sm'] {
+  padding: 6px;
+}
+
+.ce-button[data-boxed][data-size='xs'] {
+  padding: 4px;
+}

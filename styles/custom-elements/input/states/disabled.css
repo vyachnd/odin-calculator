@@ -1,0 +1,5 @@
+.ce-input:disabled,
+.ce-input[data-disabled] {
+  opacity: 0.24;
+  pointer-events: none;
+}

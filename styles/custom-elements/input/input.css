@@ -1,0 +1,53 @@
+/* Sizes */
+@import './sizes/base.css';
+
+/* States */
+@import './states/bordered.css';
+@import './states/disabled.css';
+@import './states/rounded.css';
+
+/* Variants */
+@import './variants/base.css';
+@import './variants/secondary.css';
+
+/* Appereance */
+@import './appereance.css';
+
+/* Interactive */
+@import './interactive.css';
+
+.ce-input {
+  display: inline-flex;
+  align-self: flex-start;
+  position: relative;
+  transition: background-color 0.15s, box-shadow 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.ce-input::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  z-index: 0;
+  transition: background-color 0.15s, box-shadow 0.15s, color 0.15s, opacity 0.15s;
+}
+
+.ce-input > * {
+  z-index: 1;
+}
+
+.ce-input .ce-input__field {
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+  color: inherit;
+  width: 100%;
+  font: var(--ce-font-roboto-normal);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

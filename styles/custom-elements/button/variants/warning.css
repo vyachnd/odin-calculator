@@ -1,0 +1,38 @@
+.ce-button[data-variant='warning'] {
+  --bg-color: rgba(var(--ce-color-yellow-700));
+  --text-color: rgba(var(--ce-color-yellow-100));
+
+  --hover-bg-color: rgba(var(--ce-color-yellow-600));
+  --hover-text-color: rgba(var(--ce-color-yellow-50));
+
+  --active-bg-color: rgba(var(--ce-color-yellow-500));
+  --active-text-color: rgba(var(--ce-color-yellow-50));
+
+  --focus-outline-color: rgba(var(--ce-color-yellow-50));
+}
+
+.ce-button[data-variant='warning'][data-transparent] {
+  --bg-color: rgba(var(--ce-color-yellow-400), 0.12);
+  --text-color: rgba(var(--ce-color-yellow-400));
+
+  --hover-bg-color: rgba(var(--ce-color-yellow-400), 0.18);
+  --hover-text-color: rgba(var(--ce-color-yellow-300));
+
+  --active-bg-color: rgba(var(--ce-color-yellow-400), 0.24);
+  --active-text-color: rgba(var(--ce-color-yellow-50));
+
+  --focus-outline-color: rgba(var(--ce-color-yellow-400));
+}
+
+.ce-button[data-variant='warning']:not([data-fill]) {
+  --bg-color: none;
+  --text-color: rgba(var(--ce-color-yellow-400));
+
+  --hover-bg-color: rgba(var(--ce-color-yellow-400), 0.08);
+  --hover-text-color: rgba(var(--ce-color-yellow-300));
+
+  --active-bg-color: rgba(var(--ce-color-yellow-400), 0.12);
+  --active-text-color: rgba(var(--ce-color-yellow-200));
+
+  --focus-outline-color: rgba(var(--ce-color-yellow-400));
+}
