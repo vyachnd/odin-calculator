@@ -1,7 +1,8 @@
 /* Global */
 @import './global/colors.css';
 @import './global/fonts.css';
-@import './global/styles.css';
+@import './global/positioning.css';
+@import './global/reset.css';
 
 /* Elements */
 @import './icon/icon.css';

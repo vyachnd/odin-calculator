@@ -1,0 +1,39 @@
+.ce-pos_top,
+.ce-pos_right,
+.ce-pos_bottom,
+.ce-pos_left,
+.ce-pos_center {
+  position: absolute;
+}
+
+.ce-pos_top.ce-pos_center,
+.ce-pos_bottom.ce-pos_center {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ce-pos_right.ce-pos_center,
+.ce-pos_left.ce-pos_center {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.ce-pos_top {
+  top: 0;
+}
+.ce-pos_right {
+  right: 0;
+}
+.ce-pos_bottom {
+  bottom: 0;
+}
+.ce-pos_left {
+  left: 0;
+}
+.ce-pos_center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
