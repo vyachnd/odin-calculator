@@ -1,0 +1,15 @@
+.ce-heading[data-variant='secondary'] {
+  --title-color: rgba(var(--ce-color-sky-500));
+}
+
+.ce-heading[data-variant='secondary'] .ce-heading__subtitle {
+  --subtitle-color: rgba(var(--ce-color-sky-50), 0.4);
+}
+
+.ce-heading[data-variant='secondary'] .ce-heading__link {
+  --link-color: rgba(var(--ce-color-sky-600), 0.6);
+
+  --link-color_hover: rgba(var(--ce-color-sky-400), 1);
+  --link-color_active: rgba(var(--ce-color-sky-200));
+  --link-color_focus: rgba(var(--ce-color-sky-50));
+}

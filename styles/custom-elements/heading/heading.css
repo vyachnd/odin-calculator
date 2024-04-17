@@ -1,0 +1,52 @@
+/*
+  .ce-heading
+  .ce-heading .ce-icon
+  .ce-heading .ce-heading__container
+  .ce-heading .ce-heading__container .ce-heading__title
+  .ce-heading .ce-heading__container .ce-heading__subtitle
+  .ce-heading .ce-heading__container .ce-heading__subtitle .ce-heading__subtitle.ce-heading__link
+*/
+
+/* Variants */
+@import './variants/base.css';
+@import './variants/error.css';
+@import './variants/secondary.css';
+@import './variants/submit.css';
+@import './variants/warning.css';
+
+/* Appereance */
+@import './appereance.css';
+
+/* Interactive */
+@import './interactive.css';
+
+.ce-heading {
+  display: flex;
+  gap: 4px;
+}
+
+.ce-heading .ce-heading__icon {
+  color: inherit;
+  font-size: 40px;
+}
+
+.ce-heading .ce-heading__container {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.ce-heading .ce-heading__title {
+  color: inherit;
+  font: var(--ce-font-roboto-black);
+}
+
+.ce-heading .ce-heading__subtitle {
+  font: var(--ce-font-roboto-medium-xs);
+}
+
+.ce-heading .ce-heading__link {
+  font: var(--ce-font-roboto-medium-xs);
+  text-decoration: none;
+  transition: color 0.15s;
+}

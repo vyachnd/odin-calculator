@@ -1,0 +1,11 @@
+.ce-heading .ce-heading__link:hover {
+  color: var(--link-color_hover);
+}
+
+.ce-heading .ce-heading__link:active {
+  color: var(--link-color_active);
+}
+
+.ce-heading .ce-heading__link:focus-visible {
+  color: var(--link-color_focus);
+}

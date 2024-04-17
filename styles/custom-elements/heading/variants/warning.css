@@ -1,0 +1,15 @@
+.ce-heading[data-variant='warning'] {
+  --title-color: rgba(var(--ce-color-yellow-500));
+}
+
+.ce-heading[data-variant='warning'] .ce-heading__subtitle {
+  --subtitle-color: rgba(var(--ce-color-yellow-50), 0.4);
+}
+
+.ce-heading[data-variant='warning'] .ce-heading__link {
+  --link-color: rgba(var(--ce-color-yellow-600), 0.6);
+
+  --link-color_hover: rgba(var(--ce-color-yellow-400), 1);
+  --link-color_active: rgba(var(--ce-color-yellow-200));
+  --link-color_focus: rgba(var(--ce-color-yellow-50));
+}

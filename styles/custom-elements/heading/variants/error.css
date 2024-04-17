@@ -1,0 +1,15 @@
+.ce-heading[data-variant='error'] {
+  --title-color: rgba(var(--ce-color-red-500));
+}
+
+.ce-heading[data-variant='error'] .ce-heading__subtitle {
+  --subtitle-color: rgba(var(--ce-color-red-50), 0.4);
+}
+
+.ce-heading[data-variant='error'] .ce-heading__link {
+  --link-color: rgba(var(--ce-color-red-600), 0.6);
+
+  --link-color_hover: rgba(var(--ce-color-red-400), 1);
+  --link-color_active: rgba(var(--ce-color-red-200));
+  --link-color_focus: rgba(var(--ce-color-red-50));
+}
