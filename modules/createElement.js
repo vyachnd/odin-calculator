@@ -46,8 +46,11 @@ class CreateElement {
     for (const child of this.children) {
       if (child instanceof CreateElement) {
         child.mount(this.element);
-      } else {
+      } else if (child instanceof HTMLElement) {
+        console.log(child);
         this.element.append(child);
+      } else {
+        this.element.append(document.createTextNode(child));
       }
     }
   }
