@@ -1,3 +1,4 @@
+import helpers from '../libraries/helpers.js';
 import Emitter from './emitter.js';
 
 class CreateElement {
@@ -47,10 +48,15 @@ class CreateElement {
       if (child instanceof CreateElement) {
         child.mount(this.element);
       } else if (child instanceof HTMLElement) {
-        console.log(child);
         this.element.append(child);
       } else {
-        this.element.append(document.createTextNode(child));
+        let htmlEntityChild = null;
+
+        if (child.match(/&.+;/)) {
+          htmlEntityChild = child.replaceAll(/&.+;/g, (match) => helpers.htmlEntityToUnicode(match));
+        }
+
+        this.element.append(document.createTextNode(htmlEntityChild || child));
       }
     }
   }
@@ -143,7 +149,17 @@ class CreateElement {
       if (oldChild && (newChild !== oldChild)) {
         if (newChild instanceof CreateElement) newChild.mount(this.element);
 
-        oldNodes[i].replaceWith(newChild?.element || newChild);
+        let htmlEntityChild = null;
+        const child = newChild?.element || newChild;
+
+        if (child instanceof HTMLElement) {
+          oldNodes[i].replaceWith(child);
+        } else {
+          if (child.match(/&.+;/)) {
+            htmlEntityChild = child.replaceAll(/&.+;/g, (match) => helpers.htmlEntityToUnicode(match));
+            oldNodes[i].replaceWith(document.createTextNode(htmlEntityChild || child));
+          }
+        }
 
         if (oldChild instanceof CreateElement) oldChild.unmount();
       }
@@ -151,14 +167,23 @@ class CreateElement {
       if (!oldChild) {
         if (newChild instanceof CreateElement) {
           newChild.mount(this.element);
-        } else {
+        } else if (newChild instanceof HTMLElement) {
           this.element.append(newChild);
+        } else {
+          let htmlEntityChild = null;
+
+          if (newChild.match(/&.+;/)) {
+            htmlEntityChild = newChild.replaceAll(/&.+;/g, (match) => helpers.htmlEntityToUnicode(match));
+          }
+
+          this.element.append(document.createTextNode(htmlEntityChild || newChild));
         }
       }
     }
 
     for (let i = newChildren.length; i < oldNodes.length; i += 1) {
       const oldNode = oldNodes[i];
+
 
       if (oldNode instanceof CreateElement) {
         oldNode.unmount();

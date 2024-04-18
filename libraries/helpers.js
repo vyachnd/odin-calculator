@@ -89,6 +89,13 @@ class Helpers {
   removeKey(obj, keys) {
     return Object.fromEntries(Object.entries(obj).filter(([key]) => !keys.includes(key)));
   }
+
+  htmlEntityToUnicode(htmlEntity) {
+    const tempSpan = document.createElement('span');
+    tempSpan.innerHTML = htmlEntity;
+
+    return tempSpan.textContent;
+  }
 }
 
 export default new Helpers();
