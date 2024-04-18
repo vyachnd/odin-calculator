@@ -4,10 +4,10 @@
   gap: 6px;
 }
 
-.ce-button[data-size='sm'] .button__text {
+.ce-button[data-size='sm'] .ce-button__caption {
   font: var(--ce-font-roboto-medium-sm);
 }
 
-.ce-button[data-size='sm'] .button__icon {
+.ce-button[data-size='sm'] .ce-button__icon {
   font-size: 20px;
 }
