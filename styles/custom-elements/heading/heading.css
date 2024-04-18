@@ -32,7 +32,7 @@
 
 .ce-heading .ce-heading__container {
   color: inherit;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
 }
 
