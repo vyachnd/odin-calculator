@@ -8,16 +8,30 @@
 
 .ce-pos_top.ce-pos_center,
 .ce-pos_bottom.ce-pos_center {
-  top: 0;
   left: 50%;
   transform: translateX(-50%);
+}
+.ce-pos_top.ce-pos_center {
+  top: 0;
+  bottom: initial;
+}
+.ce-pos_bottom.ce-pos_center {
+  top: initial;
+  bottom: 0;
 }
 
 .ce-pos_right.ce-pos_center,
 .ce-pos_left.ce-pos_center {
   top: 50%;
-  left: 0;
   transform: translateY(-50%);
+}
+.ce-pos_right.ce-pos_center {
+  right: 0;
+  left: initial;
+}
+.ce-pos_left.ce-pos_center {
+  right: initial;
+  left: 0;
 }
 
 .ce-pos_top {
