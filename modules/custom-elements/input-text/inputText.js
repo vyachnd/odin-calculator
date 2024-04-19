@@ -18,13 +18,15 @@ import CreateElement from '../../createElement.js';
 import { CEButton, CEIcon } from '../init.js';
 
 class CEInputText extends CreateElement {
-  constructor(children, settings, attributes = {}) {
+  constructor(children, settings, attributes = {}, events = {}) {
     super(
       'div',
       {
         disabled: Boolean(settings?.disabled),
         class: [...(attributes?.class || []), 'ce-input']
       },
+      [],
+      events,
     );
 
     this.inputChild = new CreateElement('input', {

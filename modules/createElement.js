@@ -2,13 +2,15 @@ import helpers from '../libraries/helpers.js';
 import Emitter from './emitter.js';
 
 class CreateElement {
-  constructor(tagName, attributes, children) {
+  constructor(tagName, attributes, children, events) {
     this.element = document.createElement(tagName || 'div');
     this.attributes = attributes || {};
     this.children = children || [];
+    this.events = events || {};
     this.emitter = new Emitter();
 
     this.#setAttributes();
+    this.#setEvents();
     this.#renderChildren();
   }
 
@@ -40,6 +42,12 @@ class CreateElement {
           this.element.setAttribute(attributeKey, attributeValue);
         }
       }
+    }
+  }
+
+  #setEvents() {
+    for (const [eventName, [callback, options]] of Object.entries(this.events)) {
+      this.element.addEventListener(eventName, callback, options);
     }
   }
 
@@ -137,6 +145,16 @@ class CreateElement {
     }
 
     this.attributes = newAttributes;
+  }
+
+  updateEvents(newEvents) {
+    for (const [eventName, [callback, options]] of Object.entries(newEvents)) {
+      if (this.events.hasOwnProperty(eventName)) {
+        this.element.removeEventListener(eventName, this.events[eventName][0], this.events[eventName][1]);
+      }
+
+      this.element.addEventListener(eventName, callback, options);
+    }
   }
 
   updateChildren(newChildren) {

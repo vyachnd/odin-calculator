@@ -13,7 +13,7 @@ import CreateElement from '../../createElement.js';
 import { CEIcon } from '../init.js';
 
 class CEButton extends CreateElement {
-  constructor(children, settings, attributes = {}) {
+  constructor(children, settings, attributes = {}, events = {}) {
     super(
       'button',
       {
@@ -26,6 +26,8 @@ class CEButton extends CreateElement {
         },
         disabled: Boolean(settings?.disabled),
       },
+      [],
+      events,
     );
 
     this.settings = {};
