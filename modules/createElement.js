@@ -23,7 +23,11 @@ class CreateElement {
           const [datasetKey, datasetValue] = dataset;
 
           if (typeof datasetValue === 'boolean') {
-            if (datasetValue) this.element.dataset[datasetKey] = '';
+            if (datasetValue) {
+              this.element.dataset[datasetKey] = '';
+            } else {
+              delete this.element.dataset[datasetKey];
+            }
           } else {
             this.element.dataset[datasetKey] = datasetValue;
           }
@@ -82,7 +86,11 @@ class CreateElement {
 
           if (datasetValue !== this.attributes?.dataset?.[datasetKey]) {
             if (typeof datasetValue === 'boolean') {
-              if (datasetValue) this.element.dataset[datasetKey] = '';
+              if (datasetValue) {
+                this.element.dataset[datasetKey] = '';
+              } else {
+                delete this.element.dataset[datasetKey];
+              }
             } else {
               this.element.dataset[datasetKey] = datasetValue;
             }
