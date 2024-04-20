@@ -59,12 +59,15 @@ class CreateElement {
         this.element.append(child);
       } else {
         let htmlEntityChild = null;
+        let strChild = child;
 
-        if (child.match(/&.+;/)) {
-          htmlEntityChild = child.replaceAll(/&.+;/g, (match) => helpers.htmlEntityToUnicode(match));
+        if (typeof child !== 'string') strChild = String(child);
+
+        if (strChild.match(/&.+;/)) {
+          htmlEntityChild = strChild.replaceAll(/&.+;/g, (match) => helpers.htmlEntityToUnicode(match));
         }
 
-        this.element.append(document.createTextNode(htmlEntityChild || child));
+        this.element.append(document.createTextNode(htmlEntityChild || strChild));
       }
     }
   }
@@ -168,15 +171,18 @@ class CreateElement {
         if (newChild instanceof CreateElement) newChild.mount(this.element);
 
         let htmlEntityChild = null;
-        const child = newChild?.element || newChild;
+        let child = newChild?.element || newChild;
 
         if (child instanceof HTMLElement) {
           oldNodes[i].replaceWith(child);
         } else {
+          if (typeof child !== 'string') child = String(child);
+
           if (child.match(/&.+;/)) {
             htmlEntityChild = child.replaceAll(/&.+;/g, (match) => helpers.htmlEntityToUnicode(match));
-            oldNodes[i].replaceWith(document.createTextNode(htmlEntityChild || child));
           }
+
+          oldNodes[i].replaceWith(document.createTextNode(htmlEntityChild || child));
         }
 
         if (oldChild instanceof CreateElement) oldChild.unmount();
@@ -190,11 +196,14 @@ class CreateElement {
         } else {
           let htmlEntityChild = null;
 
-          if (newChild.match(/&.+;/)) {
-            htmlEntityChild = newChild.replaceAll(/&.+;/g, (match) => helpers.htmlEntityToUnicode(match));
+          let child = newChild?.element || newChild;
+          if (typeof child !== 'string') child = String(child);
+
+          if (child.match(/&.+;/)) {
+            htmlEntityChild = child.replaceAll(/&.+;/g, (match) => helpers.htmlEntityToUnicode(match));
           }
 
-          this.element.append(document.createTextNode(htmlEntityChild || newChild));
+          this.element.append(document.createTextNode(htmlEntityChild || child));
         }
       }
     }
