@@ -175,7 +175,7 @@ class CreateElement {
       const newChild = newChildren[i];
       const oldChild = this.children[i];
 
-      if (oldChild && (newChild !== oldChild)) {
+      if (!helpers.isNullOrUndefined(oldChild) && (newChild !== oldChild)) {
         if (newChild instanceof CreateElement) newChild.mount(this.element);
 
         let htmlEntityChild = null;
@@ -196,7 +196,7 @@ class CreateElement {
         if (oldChild instanceof CreateElement) oldChild.unmount();
       }
 
-      if (!oldChild) {
+      if (helpers.isNullOrUndefined(oldChild)) {
         if (newChild instanceof CreateElement) {
           newChild.mount(this.element);
         } else if (newChild instanceof HTMLElement) {
@@ -218,7 +218,6 @@ class CreateElement {
 
     for (let i = newChildren.length; i < oldNodes.length; i += 1) {
       const oldNode = oldNodes[i];
-
 
       if (oldNode instanceof CreateElement) {
         oldNode.unmount();

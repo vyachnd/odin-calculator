@@ -96,6 +96,10 @@ class Helpers {
 
     return tempSpan.textContent;
   }
+
+  isNullOrUndefined(value) {
+    return value === null || value === undefined;
+  }
 }
 
 export default new Helpers();
