@@ -11,7 +11,10 @@ const keypadVariants = {
 
 class CalculatorRender extends CreateElement {
   constructor(model) {
-    super('div', { tabIndex: -1, class: ['calculator'] }, [], { keydown: [(event) => this.emitter.emit('handleKeyDown', event)] });
+    super('div', { tabIndex: -1, class: ['calculator'] }, [], {
+      keydown: [(event) => this.emitter.emit('handleKeyDown', event)],
+      blur: [(event) => this.emitter.emit('onBlur', event)]
+    });
 
     this.model = model;
 

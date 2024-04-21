@@ -20,3 +20,5 @@ app.updateChildren([
     calcualtorNote,
   ]),
 ]);
+
+calcualtor.focus();

@@ -5,10 +5,15 @@ class CalculatorController {
     this.model = model;
     this.render = render;
 
+    this.render.emitter.subscribe('onBlur', this.onBlur.bind(this));
     this.render.emitter.subscribe('handleCommand', this.handleCommand.bind(this));
     this.render.emitter.subscribe('handleOperator', this.handleOperator.bind(this));
     this.render.emitter.subscribe('handleInput', this.handleInput.bind(this));
   }
+
+  focus() { this.render.element.focus(); }
+
+  onBlur() { this.focus(); }
 
   handleInput(input) {
     let currentValue = this.model.currentNode?.value || '0';
