@@ -33,4 +33,5 @@ app.updateChildren([
   ]),
 ]);
 
+calcualtor.toggleKeyboard();
 calcualtor.focus();
