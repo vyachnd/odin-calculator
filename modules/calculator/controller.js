@@ -91,9 +91,10 @@ class CalculatorController {
   }
 
   handleKeyDown(event) {
-    const { key, shiftKey } = event;
+    const { key, shiftKey, ctrlKey, metaKey } = event;
+    const metaKeys = metaKey || ctrlKey;
 
-    if (!this.render.keyboardEnable) return;
+    if (!this.render.keyboardEnable || metaKeys) return;
 
     if (key.match(/^[\d\.]$/) || key === '.' || (key === '_' && shiftKey)) {
       let input = '';
