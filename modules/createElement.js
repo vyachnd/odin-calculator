@@ -137,9 +137,10 @@ class CreateElement {
           const [styleKey] = style;
 
           if (!newAttributes?.style?.hasOwnProperty(styleKey)) {
-            this.element.style[styleKey] = null;
+            this.element.style.removeProperty(styleKey);
           }
         }
+        if (this.element.style.length === 0) this.element.removeAttribute('style');
       } else if (oldAttributeKey === 'class') {
         for (const cls of oldAttributeValue) {
           if (!newAttributes?.class?.includes(cls)) {
