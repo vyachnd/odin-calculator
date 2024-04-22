@@ -1,3 +1,4 @@
+
 class Node {
   constructor(value, left, right, root) {
     this.value = value || null;
@@ -151,14 +152,43 @@ class CalculatorModel {
     }
   }
 
+  processAnswer() {
+    const operators = CalculatorModel.operators;
+
+    if (!this.node) return;
+    if (!operators[this.node.value]) return;
+
+    const prevNode = this.node;
+
+    this.history.unshift({ node: prevNode, currentNode: this.currentNode, isOperator: this.isOperator });
+    this.clear();
+
+    this.node = new Node(`${this.solve(prevNode)}`);
+    this.currentNode = this.node;
+  }
+
+  historySelect(historyData) {
+    const historyIndex = this.history.indexOf(historyData);
+
+    if (historyIndex === -1) return;
+
+    const history = this.history[historyIndex];
+
+    this.node = history.node;
+    this.currentNode = history.currentNode;
+    this.isOperator = history.isOperator;
+  }
+
   clear() {
     this.node = null;
     this.currentNode = this.node;
     this.isOperator = false;
   }
 
-  solve() {
-    if (!this.node?.left && !this.node?.right) return 0;
+  clearHistory() { this.history = []; }
+
+  solve(node = this.node) {
+    if (!node?.left && !node?.right) return 0;
 
     function solveExp(node) {
       if (!node) return 0;
@@ -175,7 +205,7 @@ class CalculatorModel {
       }
     }
 
-    return solveExp(this.node);
+    return solveExp(node);
   }
 }
 

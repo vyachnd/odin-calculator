@@ -48,16 +48,43 @@ class CalculatorRender extends CreateElement {
     this.renderCalculator();
     this.updateInput();
     this.updateResult();
+    this.updateHistory();
   }
 
   get dispalyInputElement() { return this.children[0].children[0].children[0]; }
   get updateResultElement() { return this.children[0].children[0].children[1]; }
   get keyboardControlElement() { return this.children[0].children[1].children[0]; }
   get historyControlElement() { return this.children[0].children[1].children[1]; }
+  get historyClearControlElement() { return this.children[1].children[0].children[0]; }
   get historyContainerElement() { return this.children[1]; }
+  get historyListElement() { return this.historyContainerElement.children[1]; }
 
   updateInput() { this.dispalyInputElement.updateChildren([this.model.stringifyExpression()]); }
   updateResult() { this.updateResultElement.updateChildren([this.model.solve()]); }
+  updateHistory() {
+    const history = this.model.history;
+    const historyItems = [];
+
+    for (let i = 0; i < history.length; i += 1) {
+      const historyData = history[i];
+      const solve = this.model.solve(historyData.node);
+      const expression = this.model.stringifyExpression(historyData.node);
+
+      const historyItem = new CreateElement(
+        'li',
+        { tabIndex: '0', class: ['history'] },
+        [
+          new CreateElement('span', { class: ['history__result'] }, [solve]),
+          new CreateElement('span', { class: ['history__input'] }, [expression])
+        ],
+        { click: [() => this.emitter.emit('handleHistory', historyData)] },
+      );
+
+      historyItems.push(historyItem);
+    }
+
+    this.historyListElement.updateChildren(historyItems);
+  }
 
   toggleKeyboard() {
     this.keyboardEnable = !this.keyboardEnable;
@@ -135,24 +162,12 @@ class CalculatorRender extends CreateElement {
     const rightContainer = new CreateElement('div', { class: ['calculator-container'] });
     const rightControls = new CreateElement('div', { class: ['calculator__controls'] });
     const rightHistory = new CreateElement('ul', { class: ['calculator__history'] });
-    const historyItems = [];
 
     if (!this.historyEnable) rightContainer.updateAttributes({ ...rightContainer.attributes, style: { display: 'none' } });
 
     rightControls.updateChildren([
       new CEButton([new CEIcon('delete_history', { opsz: 48 })], { size: 'sm', variant: 'error', boxed: true, transparent: true }),
     ]);
-
-    for (let i = 0; i < 10; i += 1) {
-      const historyItem = new CreateElement('li', { tabIndex: '0', class: ['history'] }, [
-        new CreateElement('span', { class: ['history__result'] }, ['200']),
-        new CreateElement('span', { class: ['history__input'] }, ['100 + 100']),
-      ]);
-
-      historyItems.push(historyItem);
-    }
-
-    rightHistory.updateChildren(historyItems);
 
     rightContainer.updateChildren([rightControls, rightHistory]);
 

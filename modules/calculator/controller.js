@@ -11,8 +11,16 @@ class CalculatorController {
     this.render.emitter.subscribe('handleInput', this.handleInput.bind(this));
     this.render.emitter.subscribe('onBlur', this.onBlur.bind(this));
 
+    this.render.emitter.subscribe('handleHistory', this.handleHistory.bind(this));
+
     this.render.keyboardControlElement.updateEvents({ click: [this.toggleKeyboard.bind(this)] });
     this.render.historyControlElement.updateEvents({ click: [this.toggleHistory.bind(this)] });
+    this.render.historyClearControlElement.updateEvents({ click: [this.clearHistory.bind(this)] });
+  }
+
+  clearHistory() {
+    this.model.clearHistory();
+    this.render.updateHistory();
   }
 
   toggleHistory() { this.render.toggleHistory(); }
@@ -25,6 +33,12 @@ class CalculatorController {
   updateDisplay() {
     this.render.updateInput();
     this.render.updateResult();
+  }
+
+  handleHistory(historyNode) {
+    this.model.historySelect(historyNode);
+    this.updateDisplay();
+    this.render.updateHistory();
   }
 
   handleInput(input) {
@@ -68,6 +82,10 @@ class CalculatorController {
 
     if (!(this.model.isOperator && operator !== 'per')) {
       this.model.processOperator(operator);
+    } else {
+      this.model.processAnswer();
+      this.model.processOperator(operator);
+      this.render.updateHistory();
     }
     this.updateDisplay();
   }
@@ -81,7 +99,9 @@ class CalculatorController {
         this.model.processRemove();
         break;
       case 'ans':
-        console.log('ans');
+        this.model.processAnswer();
+        this.render.updateHistory();
+        this.updateDisplay();
         break;
       default:
         break;
