@@ -15,6 +15,11 @@ class CalculatorController {
 
   onBlur() { this.focus(); }
 
+  updateDisplay() {
+    this.render.updateInput();
+    this.render.updateResult();
+  }
+
   handleInput(input) {
     let currentValue = this.model.currentNode?.value || '0';
 
@@ -45,8 +50,7 @@ class CalculatorController {
     if (currentValue === '') return;
 
     this.model.processInput(currentValue);
-    this.render.updateInput();
-    if (this.model.isOperator) this.render.updateResult();
+    this.updateDisplay();
   }
 
   handleOperator(operator) {
@@ -54,23 +58,29 @@ class CalculatorController {
 
     if (!operators.hasOwnProperty(operator)) return;
     if (operator === 'per' && this.model.currentNode?.root?.value === 'per') return;
-    if (this.model.isOperator && operator !== 'per') {
-      this.render.updateResult();
-      return;
-    }
 
-    this.model.processOperator(operator);
-    this.render.updateInput();
-    this.render.updateResult();
+    if (!(this.model.isOperator && operator !== 'per')) {
+      this.model.processOperator(operator);
+    }
+    this.updateDisplay();
   }
 
   handleCommand(command) {
-    if (command === 'remove') {
-      this.model.processRemove();
+    switch (command) {
+      case 'clr':
+        this.model.clear();
+        break;
+      case 'rmv':
+        this.model.processRemove();
+        break;
+      case 'ans':
+        console.log('ans');
+        break;
+      default:
+        break;
     }
 
-    this.render.updateInput();
-    this.render.updateResult();
+    this.updateDisplay();
   }
 }
 

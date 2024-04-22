@@ -38,9 +38,9 @@ class CalculatorRender extends CreateElement {
       'add': new CEButton(['+'], { ...keypadVariants.warning }, {}, { click: [() => this.emitter.emit('handleOperator', 'add')] }),
       'per': new CEButton(['%'], { ...keypadVariants.warning }, {}, { click: [() => this.emitter.emit('handleOperator', 'per')] }),
 
-      'clr': new CEButton(['C'], { ...keypadVariants.error }, {}, { click: [() => this.emitter.emit('handleCommand', 'clear')] }),
-      'rmv': new CEButton(['CE'], { ...keypadVariants.secondary }, {}, { click: [() => this.emitter.emit('handleCommand', 'remove')] }),
-      'ans': new CEButton(['='], { ...keypadVariants.submit }, {}, { click: [() => this.emitter.emit('handleCommand', 'submit')] }),
+      'clr': new CEButton(['C'], { ...keypadVariants.error }, {}, { click: [() => this.emitter.emit('handleCommand', 'clr')] }),
+      'rmv': new CEButton(['CE'], { ...keypadVariants.secondary }, {}, { click: [() => this.emitter.emit('handleCommand', 'rmv')] }),
+      'ans': new CEButton(['='], { ...keypadVariants.submit }, {}, { click: [() => this.emitter.emit('handleCommand', 'ans')] }),
     };
 
     this.renderCalculator();

@@ -36,6 +36,9 @@ class Node {
     this.left = left || null;
     this.right = right || null;
     this.root = root || null;
+
+    if (left) this.left.root = this;
+    if (right) this.right.root = this;
   }
 }
 
@@ -98,7 +101,7 @@ class CalculatorModel {
         this.isOperator = true;
 
         newNode.left = this.node;
-        newNode.right = new Node('0');
+        newNode.right = new Node();
 
         newNode.left.root = newNode;
         newNode.right.root = newNode;
@@ -112,8 +115,10 @@ class CalculatorModel {
           newNode.right = this.node;
           this.node = newNode;
         } else {
-          newNode.left = this.currentNode.root.left;
+          const left = this.currentNode.root.left;
+          newNode.left = new Node(left.value, left.left, left.right);
           newNode.right = new Node(this.currentNode.value);
+          newNode.root = this.node;
           this.node.right = newNode;
         }
 
@@ -128,42 +133,81 @@ class CalculatorModel {
   }
 
   processRemove() {
+    const operators = CalculatorModel.operators;
+
     if (!this.node) return;
 
-    let newValue = this.currentNode.value.slice(0, -1);
-
-    if (this.currentNode.root) {
-      if (this.currentNode.value === '') {
-        this.node = this.currentNode.root.left;
-        this.node.root = null;
+    if (operators[this.currentNode.root?.value] === operators.per) {
+      if (!this.currentNode.root.root) {
+        this.node = new Node(this.currentNode.value);
         this.currentNode = this.node;
-        newValue = this.currentNode.value;
-        this.isOperator = false;
+      } else {
+        this.currentNode.root.root.right = new Node(this.currentNode.root.right.value, null, null, this.currentNode.root.root);
+        this.currentNode = this.currentNode.root.root.right;
       }
-      console.log(this.currentNode);
     } else {
-      if (newValue === '') {
-        this.node = null;
-        this.currentNode = this.node;
+      if (!this.currentNode.root) {
+        if (this.currentNode.value.replace(/[\-\.]/g, '') === '0') {
+          this.node = null;
+          this.currentNode = this.node;
+        } else {
+          this.currentNode.value = this.currentNode.value.slice(0, -1) || '0';
+
+          if (this.currentNode.value === '' || this.currentNode.value === '-') {
+            this.node = null;
+            this.currentNode = this.node;
+          }
+        }
+      } else {
+        if (!this.currentNode.value || this.currentNode.value.replace(/[\-\.]/g, '') === '0') {
+          let prevNode = this.currentNode.root.left;
+
+          this.node = new Node(prevNode.value, prevNode.left, prevNode.right);
+          if (operators[prevNode.value] === operators.per) {
+            this.currentNode = this.node.right;
+          } else {
+            this.currentNode = this.node;
+          }
+          this.isOperator = false;
+        } else {
+          const prevNode = this.currentNode.root.left;
+          this.currentNode.value = this.currentNode.value.slice(0, -1) || '0';
+
+          if (this.currentNode.value === '' || this.currentNode.value === '-') {
+            this.node = new Node(prevNode.value, prevNode.left, prevNode.right);
+            this.currentNode = this.node;
+            this.isOperator = false;
+          }
+        }
       }
     }
-
-    if (this.currentNode) this.currentNode.value = newValue;
   }
 
-  solve(node = this.node) {
-    if (!node) return 0;
+  clear() {
+    this.node = null;
+    this.currentNode = this.node;
+    this.isOperator = false;
+  }
 
-    if (node.left && node.right) {
-      const leftValue = this.solve(node.left) || '0';
-      const rightValue = this.solve(node.right) || '0';
+  solve() {
+    if (!this.node?.left && !this.node?.right) return 0;
 
-      if (node.value === 'div' && rightValue === 0) throw new Error('Division by zero');
+    function solveExp(node) {
+      if (!node) return 0;
 
-      return +(CalculatorModel.operators[node.value](leftValue, rightValue).toFixed(4));
-    } else {
-      return +(parseFloat(node.value).toFixed(4));
+      if (node.left && node.right) {
+        const leftValue = solveExp(node.left) || 0;
+        const rightValue = solveExp(node.right) || 0;
+
+        if (node.value === 'div' && rightValue === 0) throw new Error('Division by zero');
+
+        return +(CalculatorModel.operators[node.value](leftValue, rightValue).toFixed(4));
+      } else {
+        return +(parseFloat(node.value).toFixed(4));
+      }
     }
+
+    return solveExp(this.node);
   }
 }
 
