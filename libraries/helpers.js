@@ -69,7 +69,7 @@ class Helpers {
       const copy = new Map();
 
       for (const [key, value] of source.entries()) {
-        copy.set(key, deepCopy(value));
+        copy.set(key, this.deepCopy(value));
       }
 
       return copy;
@@ -77,7 +77,7 @@ class Helpers {
       const copy = {};
 
       for (const [key, value] of Object.entries(source)) {
-        copy[key] = deepCopy(value);
+        copy[key] = this.deepCopy(value);
       }
 
       return copy;
