@@ -17,6 +17,7 @@ class CalculatorRender extends CreateElement {
     });
 
     this.model = model;
+    this.keyboardEnable = false;
 
     this.keypadKeys = {
       '0': new CEButton(['0'], { ...keypadVariants.base }, {}, { click: [() => this.emitter.emit('handleInput', '0')] }),
@@ -48,14 +49,23 @@ class CalculatorRender extends CreateElement {
     this.updateResult();
   }
 
-  updateInput() {
-    const { children: [input] } = this.children[0].children[0];
-    input.updateChildren([this.model.stringifyExpression()]);
-  }
+  get dispalyInputElement() { return this.children[0].children[0].children[0]; }
+  get updateResultElement() { return this.children[0].children[0].children[1]; }
+  get keyboardControlElement() { return this.children[0].children[1].children[0]; }
 
-  updateResult() {
-    const { children: [, result] } = this.children[0].children[0];
-    result.updateChildren([this.model.solve()]);
+  updateInput() { this.dispalyInputElement.updateChildren([this.model.stringifyExpression()]); }
+  updateResult() { this.updateResultElement.updateChildren([this.model.solve()]); }
+
+  toggleKeyboard() {
+    this.keyboardEnable = !this.keyboardEnable;
+
+    if (this.keyboardEnable) {
+      this.keyboardControlElement.setSettings({ ...this.keyboardControlElement.settings, variant: 'secondary' });
+    } else {
+      this.keyboardControlElement.setSettings({ ...this.keyboardControlElement.settings, variant: null });
+    }
+
+    this.emitter.emit('toggleKeyboard', this.keyboardEnable);
   }
 
   processKeyDown(key) {

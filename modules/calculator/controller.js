@@ -5,11 +5,16 @@ class CalculatorController {
     this.model = model;
     this.render = render;
 
-    this.render.emitter.subscribe('onBlur', this.onBlur.bind(this));
+    this.render.emitter.subscribe('handleKeyDown', this.handleKeyDown.bind(this));
     this.render.emitter.subscribe('handleCommand', this.handleCommand.bind(this));
     this.render.emitter.subscribe('handleOperator', this.handleOperator.bind(this));
     this.render.emitter.subscribe('handleInput', this.handleInput.bind(this));
+    this.render.emitter.subscribe('onBlur', this.onBlur.bind(this));
+
+    this.render.keyboardControlElement.updateEvents({ click: [this.toggleKeyboard.bind(this)] });
   }
+
+  toggleKeyboard() { this.render.toggleKeyboard(); }
 
   focus() { this.render.element.focus(); }
 
@@ -81,6 +86,47 @@ class CalculatorController {
     }
 
     this.updateDisplay();
+  }
+
+  handleKeyDown(event) {
+    const { key, shiftKey } = event;
+
+    if (!this.render.keyboardEnable) return;
+
+    if (key.match(/^[\d\.]$/) || key === '.' || (key === '_' && shiftKey)) {
+      let input = '';
+
+      if (key.match(/^[\d\.]$/)) input = key;
+      if (key === '.') input = 'flt';
+      if (key === '_' && shiftKey) input = 'neg';
+
+      this.handleInput(input);
+      this.render.processKeyDown(input);
+    }
+
+    if (key === 'Backspace' || key === 'Escape' || (key === 'Enter' || key === '=')) {
+      let command = '';
+
+      if (key === 'Backspace') command = 'rmv';
+      if (key === 'Escape') command = 'clr';
+      if (key === 'Enter' || key === '=') command = 'ans';
+
+      this.handleCommand(command);
+      this.render.processKeyDown(command);
+    }
+
+    if (key === '-' || key === '+' || key === '*' || key === '/' || key === '%') {
+      let operator = '';
+
+      if (key === '-') operator = 'sub';
+      if (key === '+') operator = 'add';
+      if (key === '*') operator = 'mul';
+      if (key === '/') operator = 'div';
+      if (key === '%') operator = 'per';
+
+      this.handleOperator(operator);
+      this.render.processKeyDown(operator);
+    }
   }
 }
 

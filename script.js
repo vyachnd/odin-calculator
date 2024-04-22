@@ -5,12 +5,24 @@ import { CEButton, CEIcon } from './modules/custom-elements/init.js';
 
 const app = new CreateElement('div', { id: 'app' });
 const calcualtor = new Calculator();
+const calculatorKeyboardBtn = new CEButton(
+  [new CEIcon('keyboard', { opsz: 40 })],
+  { size: 'sm', boxed: true, transparent: true },
+  {},
+  { click: [() => calcualtor.toggleKeyboard()] },
+);
 const calcualtorNote = new CreateElement('span', { class: ['app__note', 'ce-pos_bottom'] }, [
   'You can use your keyboard to type! To do this, click on this button',
-  new CEButton([
-    new CEIcon('keyboard', { opsz: 40 })
-  ], { size: 'sm', boxed: true, transparent: true })
+  calculatorKeyboardBtn,
 ]);
+
+calcualtor.render.emitter.subscribe('toggleKeyboard', (state) => {
+  if (state) {
+    calculatorKeyboardBtn.setSettings({ ...calculatorKeyboardBtn.settings, variant: 'secondary' });
+  } else {
+    calculatorKeyboardBtn.setSettings({ ...calculatorKeyboardBtn.settings, variant: null });
+  }
+});
 
 app.mount(document.body, true);
 app.updateChildren([
