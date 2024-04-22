@@ -4,7 +4,7 @@
   border-radius: 8px;
   outline: 1px solid rgba(var(--ce-color-zinc-50), 0);
 
-  display: flex;
+  display: inline-flex;
   height: 408px;
   overflow: hidden;
 

@@ -18,6 +18,7 @@ class CalculatorRender extends CreateElement {
 
     this.model = model;
     this.keyboardEnable = false;
+    this.historyEnable = false;
 
     this.keypadKeys = {
       '0': new CEButton(['0'], { ...keypadVariants.base }, {}, { click: [() => this.emitter.emit('handleInput', '0')] }),
@@ -52,6 +53,8 @@ class CalculatorRender extends CreateElement {
   get dispalyInputElement() { return this.children[0].children[0].children[0]; }
   get updateResultElement() { return this.children[0].children[0].children[1]; }
   get keyboardControlElement() { return this.children[0].children[1].children[0]; }
+  get historyControlElement() { return this.children[0].children[1].children[1]; }
+  get historyContainerElement() { return this.children[1]; }
 
   updateInput() { this.dispalyInputElement.updateChildren([this.model.stringifyExpression()]); }
   updateResult() { this.updateResultElement.updateChildren([this.model.solve()]); }
@@ -66,6 +69,26 @@ class CalculatorRender extends CreateElement {
     }
 
     this.emitter.emit('toggleKeyboard', this.keyboardEnable);
+  }
+
+  toggleHistory() {
+    this.historyEnable = !this.historyEnable;
+
+    if (this.historyEnable) {
+      this.historyControlElement.setSettings({ ...this.historyControlElement.settings, variant: 'secondary' });
+      this.historyContainerElement.updateAttributes({
+        ...this.historyContainerElement.attributes,
+        style: { ...(this.historyContainerElement.attributes.style || {}), display: null },
+      });
+    } else {
+      this.historyControlElement.setSettings({ ...this.historyControlElement.settings, variant: null });
+      this.historyContainerElement.updateAttributes({
+        ...this.historyContainerElement.attributes,
+        style: { ...(this.historyContainerElement.attributes.style || {}), display: 'none' },
+      });
+    }
+
+    this.emitter.emit('toggleHistory', this.historyEnable);
   }
 
   processKeyDown(key) {
@@ -113,6 +136,8 @@ class CalculatorRender extends CreateElement {
     const rightControls = new CreateElement('div', { class: ['calculator__controls'] });
     const rightHistory = new CreateElement('ul', { class: ['calculator__history'] });
     const historyItems = [];
+
+    if (!this.historyEnable) rightContainer.updateAttributes({ ...rightContainer.attributes, style: { display: 'none' } });
 
     rightControls.updateChildren([
       new CEButton([new CEIcon('delete_history', { opsz: 48 })], { size: 'sm', variant: 'error', boxed: true, transparent: true }),

@@ -12,8 +12,10 @@ class CalculatorController {
     this.render.emitter.subscribe('onBlur', this.onBlur.bind(this));
 
     this.render.keyboardControlElement.updateEvents({ click: [this.toggleKeyboard.bind(this)] });
+    this.render.historyControlElement.updateEvents({ click: [this.toggleHistory.bind(this)] });
   }
 
+  toggleHistory() { this.render.toggleHistory(); }
   toggleKeyboard() { this.render.toggleKeyboard(); }
 
   focus() { this.render.element.focus(); }

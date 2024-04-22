@@ -11,10 +11,6 @@ const calculatorKeyboardBtn = new CEButton(
   {},
   { click: [() => calcualtor.toggleKeyboard()] },
 );
-const calcualtorNote = new CreateElement('span', { class: ['app__note', 'ce-pos_bottom'] }, [
-  'You can use your keyboard to type! To do this, click on this button',
-  calculatorKeyboardBtn,
-]);
 
 calcualtor.render.emitter.subscribe('toggleKeyboard', (state) => {
   if (state) {
@@ -24,14 +20,16 @@ calcualtor.render.emitter.subscribe('toggleKeyboard', (state) => {
   }
 });
 
-app.mount(document.body, true);
 app.updateChildren([
-  new CEHeading({ icon: 'calculate', title: 'CALCULATOR', variant: 'warning' }),
-  new CreateElement('div', { class: ['app__container', 'ce-pos_center'] }, [
-    calcualtor.render,
-    calcualtorNote,
+  new CEHeading({ icon: 'calculate', title: 'CALCULATOR', variant: 'warning' }, { class: ['ce-pos_left', 'ce-pos_top'] }),
+  calcualtor.render,
+  new CreateElement('span', { class: ['app__note'] }, [
+    'You can use your keyboard to type! To do this, click on this button',
+    calculatorKeyboardBtn,
   ]),
 ]);
+
+app.mount(document.body, true);
 
 calcualtor.toggleKeyboard();
 calcualtor.focus();

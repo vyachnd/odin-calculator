@@ -16,24 +16,29 @@ body,
   height: 100%;
   min-height: 100vh;
   padding: 16px;
-}
 
-#app .app__container {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   gap: 40px;
 }
 
-.app__note {
+#app .ce-heading {
+  margin-left: 16px;
+  margin-top: 16px;
+}
+
+#app .calculator {
+  margin-top: 32px;
+}
+
+#app .app__note {
   color: rgba(var(--ce-color-zinc-50), 0.4);
   font: var(--ce-font-roboto-medium-sm);
 
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   gap: 8px;
-
-  margin: -40px 0;
-  transform: translateY(100%);
 }
