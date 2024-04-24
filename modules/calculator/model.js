@@ -155,16 +155,21 @@ class CalculatorModel {
   processAnswer() {
     const operators = CalculatorModel.operators;
 
-    if (!this.node) return;
-    if (!operators[this.node.value]) return;
+    try {
+      if (!this.node) return;
+      if (!operators[this.node.value]) return;
 
-    const prevNode = this.node;
+      const prevNode = this.node;
+      const answer = this.solve(prevNode);
 
-    this.history.unshift({ node: prevNode, currentNode: this.currentNode, isOperator: this.isOperator });
-    this.clear();
+      this.history.unshift({ node: prevNode, currentNode: this.currentNode, isOperator: this.isOperator });
+      this.clear();
 
-    this.node = new Node(`${this.solve(prevNode)}`);
-    this.currentNode = this.node;
+      this.node = new Node(`${answer}`);
+      this.currentNode = this.node;
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   historySelect(historyData) {

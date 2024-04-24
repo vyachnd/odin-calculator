@@ -60,7 +60,16 @@ class CalculatorRender extends CreateElement {
   get historyListElement() { return this.historyContainerElement.children[1]; }
 
   updateInput() { this.dispalyInputElement.updateChildren([this.model.stringifyExpression()]); }
-  updateResult() { this.updateResultElement.updateChildren([this.model.solve()]); }
+
+  updateResult() {
+    try {
+      const result = this.model.solve();
+      this.updateResultElement.updateChildren([result]);
+    } catch (err) {
+      this.updateResultElement.updateChildren([err.message]);
+    }
+  }
+
   updateHistory() {
     const history = this.model.history;
     const historyItems = [];
