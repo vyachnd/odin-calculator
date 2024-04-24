@@ -5,7 +5,7 @@ const fonts = [
 ];
 
 async function preloadMSFonts() {
-  Promise.all(fonts).then((fonts) => {
+  return Promise.all(fonts.map((font) => font.load())).then((fonts) => {
     fonts.forEach((font) => document.fonts.add(font));
   });
 }
